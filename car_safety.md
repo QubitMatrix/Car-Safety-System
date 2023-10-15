@@ -1,14 +1,5 @@
 ## Car Safety System   
 
-### Problem Statement
-   Statistics show that 94% of fatal road accidents occur due to human error.   
-This project aims to reduce such incidents with the help of a hardware implementation which includes:   
-1. Alcohol detection: An MQ3 Alcohol sensor that helps to detect the presence of alcohol in the vehicle, in the vicinity of the driver.   
-2. Sleep detection: An IR Eye Blink sensor which counts the number of eye blinks of the driver to detect fatigue.   
-3. Proximity detection: An IR Proximity sensor is used to check the nearness of the vehicle to various obstacles in its path.   
-
-All these sensors work in unison to ensure the safety of the driver and the passengers. On the activation of any of the first two sensors, a buzzer is activated and the driver is forced to adopt corrective measures. The proximity detection sensor, on the other hand, brings the car to a stop as part of safety.
-
 ### Components
 - breadboard
 - jumper wires
@@ -24,11 +15,13 @@ All these sensors work in unison to ensure the safety of the driver and the pass
 - MQ3 Alcohol sensor
 - IR sensor
 - IR Eye Blinking sensor
+<br/>
 
 ### Circuit Diagrams
 The complete circuit is broken into three parts - sensors and buzzer, motor shield, LCD display connections.All the colliding connections can be made via a breadboard.   
 The motor shield is actually supposed to be mounted directly on the arduino but this means we cannot use the ports for the other sensors.   
 > If the repo for the AFMotor is checked it can be noted that only the ports 4,7,8 and 12 are used by the motor shield along with other general ports like 5v,GND,etc. So only these ports will be connected.   
+<br/>
 
 **Sensors and buzzer**   
 <img width="600" alt="arduino_sensors" src="https://user-images.githubusercontent.com/60323193/235228870-7bcdfa19-933d-46c5-8aaa-2a5dd812daca.png">
@@ -40,6 +33,29 @@ The motor shield is actually supposed to be mounted directly on the arduino but 
 <img width="600" alt="arduino_lcd" src="https://user-images.githubusercontent.com/60323193/235229032-a3cafeff-0d78-4382-ab18-cf2d9411eff8.png">
 <br/>   
 
+**Abstract Circuit Overview**   
+<img width="600" alt="arduino_lcd" src="https://github.com/QubitMatrix/QubitMatrix/assets/60323193/c0592adb-450d-482f-a180-aed6360ce25a">
+<br/>     
+
+
+### Working of Project   
+- Three sensors- MQ3 Alcohol sensor, IR blink sensor, IR proximity sensors are 
+connected to the Arduino board. A LCD display and buzzer used to warn the driver
+is also a part of the circuit. A motor driver shield is used to run the TT DC motors 
+which help the car to move. The motor driver is also connected to the Arduino 
+Board.
+- The AF_Motor library provides the functions that help run the motor. The car 
+remains in motion unless an object is detected within the specified proximity and 
+displays the message “OBJECT DETECTED” on the LCD. “NO OBJECT” is 
+displayed on the LCD otherwise.
+- On detection of alcohol (Ethanol used) the buzzer makes a sharp sound, notifying 
+the driver that he/she is not fit to drive. The buzzer remains activated until no 
+alcohol is detected, “ALCOHOL DETECTED” is displayed on the LCD. “NO 
+ALCOHOL” is displayed otherwise.
+- The eye blinking sensor is activated if the driver’s eyes are closed for more than 3 
+seconds. The buzzer is also activated in this condition. The LCD display shows 
+“FATIGUE DETECTED” and buzzes until the driver wakes up 
+<br/>
 
 ### Source Code
 ```
@@ -198,6 +214,7 @@ void loop()
   }
 }
 ```
+
 ### Final Product Images   
 <img height="600px" width="350px" alt="car" src="https://user-images.githubusercontent.com/60323193/235230965-dbe760ca-249e-4441-a4c3-91e755b347e4.jpg"> <img height="400px" width="300px" alt="car-glasses" src="https://user-images.githubusercontent.com/60323193/235230980-9dae9fd1-aad6-4e20-b468-fd6ebd3ea072.jpg"> <img height="600px" width="350px" alt="car-working" src="https://user-images.githubusercontent.com/60323193/235233992-743b73c9-98bd-4e96-9f2f-4be43f57e065.jpg"> 
 
